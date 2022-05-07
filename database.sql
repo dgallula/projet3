@@ -1,5 +1,6 @@
 create database vacations;
 
+
 use vacations;
 
 
@@ -35,22 +36,21 @@ img VARCHAR(255) not null,
 price int not null,
 DateFrom datetime not null,
 DateUntil datetime not null,
-followers int not null,
 userId int not null,
 PRIMARY KEY (id),
 FOREIGN KEY(userId) REFERENCES users(id)
 );
 
-INSERT INTO vacations (cityName,country, descriptions, img, price, dateFrom, dateUntil, followers, userId)
+INSERT INTO vacations (cityName,country, descriptions, img, price, dateFrom, dateUntil, userId)
 VALUES
 
-('Paris', 'France','Paris la ville des amoureux','Paris.jpej', 499, '2022-06-23', '2022-06-23', 5000, 1),
-('Madrid' ,'Espagne','Viva espagna','Madrid.jpej', 399, '2020-07-23', '2022-07-23', 4000,2),
-('Courchevelle','France','La montagne , Ca vous gagne','Courchevelle.jpej', 699, '2022-08-23', '2022-08-23', 6000,2),
-('Miami', 'USA','une destination tres prisee ','Miami.webp', 899, '2022-08-23', '2022-08-23', 10000,1),
-('New york', 'USA','New York new york  ','NY.jpej', 899, '2022-09-23', '2022-09-23', 80000,3),
-('Jerusalem', 'Israel', 'la ville des trois religions ','Jerusalem.jpej', 999, '2022-10-23', '2022-10-23', 20000,4),
-('Bruxelle', 'Belgium','une ville tres agrable ','Belgium.jpej', 399, '2022-10-23', '2022-10-23', 40000,4);
+('Paris', 'France','Paris la ville des amoureux','Paris.jpej', 499, '2022-06-23', '2022-06-23',  1),
+('Madrid' ,'Espagne','Viva espagna','Madrid.jpej', 399, '2020-07-23', '2022-07-23', 2),
+('Courchevelle','France','La montagne , Ca vous gagne','Courchevelle.jpej', 699, '2022-08-23', '2022-08-23', 2),
+('Miami', 'USA','une destination tres prisee ','Miami.webp', 899, '2022-08-23', '2022-08-23', 1),
+('New york', 'USA','New York new york  ','NY.jpej', 899, '2022-09-23', '2022-09-23', 3),
+('Jerusalem', 'Israel', 'la ville des trois religions ','Jerusalem.jpej', 999, '2022-10-23', '2022-10-23',4),
+('Bruxelle', 'Belgium','une ville tres agrable ','Belgium.jpej', 399, '2022-10-23', '2022-10-23', 4);
 
 
 
@@ -79,6 +79,13 @@ VALUES
 
  select * from follow;
  
+ select followers from follow where userId = 1;
+ 
 select * from vacations;
 
 select * from users;
+
+SELECT * FROM users where role= 'admin';
+
+SELECT *
+FROM vacations

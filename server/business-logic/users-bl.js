@@ -12,6 +12,14 @@ const getAdmin = () => {
   return usersDal.getAdmin();
 };
 
+
+const getByUsers = () => {
+  return usersDal.getByUsers();
+};
+
+
+
+
 const addUser = (newUser) => {
   return usersDal.addNewUser(newUser);
 };
@@ -21,6 +29,7 @@ const updateUser = (id, user) => {
 };
 export default {
   getAdmin,
+  getByUsers,
   getAll,
   addUser,
   getUserBy,

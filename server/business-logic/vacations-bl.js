@@ -12,8 +12,16 @@ const getFollowers = () => {
   return vacationsDal.getAllFollowers();
 };
 
+const getAllVacationsFollowers = () => {
+  return vacationsDal.getAllVacationsFollowers();
+};
+
+const getAllVacationsFollowersById=(id)=>{
+   return vacationsDal.getAllVacationsFollowersById();
+}
+
 const addVacation = (newVacationBody) => {
-  return vacationsDal.anddNewVacation(newVacationBody);
+  return vacationsDal.addVacation(newVacationBody);
 };
 
 const updateVacation = (id, vacation) => {
@@ -32,6 +40,8 @@ export default {
   getAll,
   getBy,
   addVacation,
+  getAllVacationsFollowers,
+  getAllVacationsFollowersById,
   deleteVacation,
   getFollowers,
   addNewFollower,

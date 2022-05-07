@@ -39,11 +39,25 @@ vacationsRouter.get(
 vacationsRouter.get(
   `${generalSetting.baseUrl}/vacations-followers`,
   async (req, res) => {
-    const getFollowersResult = await vacationsBl.getFollowers();
+    const getFollowersResult = await vacationsBl.getAllVacationsFollowers();
     if (!checkResultStatus(getFollowersResult)) {
       return res.status(500).send(getFollowersResult);
     } else {
       return res.send(getFollowersResult.data);
+    }
+  }
+);
+
+vacationsRouter.get(
+  `${generalSetting.baseUrl}/vacations-followers/:id`,
+  async (req, res) => {
+    const id = req.params.id;
+    const getVecationResult = await vacationsBl.getBy(id);
+
+    if (!checkResultStatus(getVecationResult)) {
+      return res.status(500).send(getVecationResult);
+    } else {
+      return res.send(getVecationResult.data);
     }
   }
 );
@@ -90,7 +104,7 @@ vacationsRouter.put(
   // add followers 
 
 vacationsRouter.post(
-  `${generalSetting.baseUrl}/vacations-followers`,
+  `${generalSetting.baseUrl}/follow`,
   async (req, res) => {
     const { user, vacation } = req.body;
     const postFollowerResult = await vacationsBl.addNewFollower(

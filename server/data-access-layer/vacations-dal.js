@@ -5,6 +5,8 @@ let vacationsResult = {
   data: null,
 };
 
+// get vacations without followers
+
 const getAll = async () => {
   try {
     let getAllResult = await connection
@@ -17,6 +19,41 @@ const getAll = async () => {
   }
   return vacationsResult;
 };
+
+// get vacations with followers 
+
+const getAllVacationsFollowers = async () => {
+  try {
+    let getAllResult = await connection
+      .promise()
+      .query("SELECT vacations.* ,COUNT(follow.vacationId) AS NumberVacations FROM follow  LEFT JOIN vacations ON follow.vacationId = vacations.id GROUP BY vacations.cityName  ORDER BY vacations.id ASC");
+
+    vacationsResult.success = true;
+    vacationsResult.data = getAllResult[0];
+  } catch (error) {
+    vacationsResult.data = error;
+  }
+  return vacationsResult;
+};
+
+// get vacations with followers by Id
+
+const getAllVacationsFollowersById = async () => {
+  try {
+    let getAllResult = await connection
+      .promise()
+      .query("select vacations.*,Count(follow.vacationId) As numberVacations from Follow  left join vacations on follow.vacationId = vacations.Id  where exists ( select * from follow where vacations.id = follow.vacationId and follow.userId ) group by vacations.cityName");
+
+    vacationsResult.success = true;
+    vacationsResult.data = getAllResult[0];
+  } catch (error) {
+    vacationsResult.data = error;
+  }
+  return vacationsResult;
+
+};
+
+// get vacations without followers bi Id 
 
 const getVacationById = async (vacationId) => {
   try {
@@ -43,7 +80,9 @@ const getAllFollowers = async () => {
   return vacationsResult;
 };
 
-const anddNewVacation = async (newVacation) => {
+// addVacation
+
+const addVacation = async (newVacation) => {
   try {
     let postResult = await connection.promise()
       .query(`INSERT INTO vacations (destination, description, image, price, startDate, endDate, followers)
@@ -109,7 +148,9 @@ const deleteVacation = async (vacationId) => {
 export default {
   getAll,
   getVacationById,
-  anddNewVacation,
+  getAllVacationsFollowers,
+  getAllVacationsFollowersById,
+  addVacation,
   deleteVacation,
   getAllFollowers,
   addNewFollowerToDB,
